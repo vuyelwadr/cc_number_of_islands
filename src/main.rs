@@ -28,11 +28,11 @@ fn num_of_islands(grid: &[bool], rows: usize, cols: usize) -> usize{
         
         
         
-            let mut first = true_values.get(0);
+            let first = true_values.get(0);
              if let Some(tuple) = first {
              
-                let mut row: usize = tuple.0;
-                let mut col: usize = tuple.1;
+                let row: usize = tuple.0;
+                let col: usize = tuple.1;
                 let mut island = Vec::new();
                 island.push((row,col));
                 
@@ -112,3 +112,143 @@ fn extract_true_values(grid: &[bool], rows: usize) -> Vec<(usize, usize)> {
     }
     true_values
 }
+
+
+#[cfg(test)]
+mod tests {
+    use super::num_of_islands;
+
+    #[test]
+    fn test_1() {
+        let islands = vec![
+            true,   true,   false,  true,   false,  true, 
+            true,   false,  false,  true,   false,  true, 
+            false,  false,  false,  false,  false,  true, 
+            true,   true,   true,   false,  false,  true, 
+            false,  true,   false,  false,  true,   true, 
+            false,  true,   true,   false,  false,  true, 
+            false,  true,   false,  false,  false,  true, 
+            true,   true,   false,  false,  false,  false, 
+            true,   true,   false,  false,  false,  false, 
+            false,  false,  false,  true,   false,  true, 
+            false,  false,  false,  false,  false,  false, 
+            false,  false,  false,  false,  false,  false, 
+        ];
+
+        let num = num_of_islands(&islands, 6, 12);
+        
+        assert_eq!(num, 6);
+    }
+
+    #[test]
+    fn test_2() {
+        let islands = vec![
+            false,  false,  false,  false, 
+            true,   false,  false,  true, 
+            false,  false,  false,  false, 
+            false,  false,  false,  false, 
+            false,  false,  true,   false, 
+            false,  false,  false,  false, 
+            false,  false,  false,  false, 
+            false,  false,  false,  false, 
+            false,  false,  false,  false, 
+        ];
+    
+        let num = num_of_islands(&islands, 4, 9);
+        assert_eq!(num, 3);
+    }
+    #[test]
+    fn test_3() {
+        let islands = vec![
+            false, 	false, 	false, 	false, 	false, 	false, 
+            false, 	false, 	false, 	false, 	false, 	false, 
+            false, 	false, 	false, 	false, 	false, 	false, 
+            false, 	false, 	false, 	false, 	false, 	false, 
+            false, 	false, 	false, 	false, 	false, 	false, 
+            false, 	false, 	false, 	false, 	false, 	false, 
+            false, 	false, 	false, 	false, 	false, 	false, 
+            false, 	false, 	false, 	false, 	false, 	false, 
+        ];
+    
+        let num = num_of_islands(&islands, 6, 8);
+        assert_eq!(num, 0);
+    }
+
+    #[test]
+    fn test_4() {
+        let islands = vec![
+            false, 	false, 	true, 	false, 
+            false, 	false, 	false, 	false, 
+        ];
+    
+        let num = num_of_islands(&islands, 4, 2);
+        assert_eq!(num, 1);
+    }
+
+    #[test]
+    fn test_5() {
+        let islands = vec![
+            true, 	true, 	true, 	true, 	true, 	true, 
+            true, 	true, 	true, 	true, 	true, 	true, 
+            true, 	true, 	true, 	true, 	true, 	true, 
+            true, 	false, 	true, 	true, 	true, 	true, 
+            true, 	true, 	true, 	true, 	true, 	true, 
+            true, 	true, 	false, 	true, 	false, 	true, 
+            true, 	true, 	true, 	true, 	true, 	true, 
+            true, 	true, 	true, 	true, 	true, 	true, 
+        ];
+    
+        let num = num_of_islands(&islands, 6, 8);
+        assert_eq!(num, 1);
+    }
+
+    #[test]
+    fn test_6() {
+        let islands = vec![
+            false, 	false, 	false, 	false, 	false, 	false, 	false, 	false, 	false, 	false, 	false, 	false, 
+            false, 	true, 	false, 	false, 	false, 	false, 	false, 	false, 	false, 	false, 	false, 	false, 
+            false, 	true, 	false, 	false, 	false, 	true, 	false, 	false, 	false, 	false, 	false, 	false, 
+            false, 	true, 	false, 	false, 	false, 	true, 	false, 	false, 	false, 	false, 	true, 	false, 
+            false, 	true, 	false, 	false, 	false, 	true, 	false, 	false, 	false, 	false, 	true, 	false, 
+            false, 	true, 	false, 	false, 	false, 	true, 	false, 	false, 	false, 	false, 	true, 	false, 
+            false, 	true, 	false, 	false, 	true, 	true, 	true, 	false, 	false, 	false, 	false, 	false, 
+            false, 	true, 	false, 	false, 	false, 	true, 	false, 	false, 	false, 	false, 	false, 	false, 
+            false, 	false, 	false, 	false, 	false, 	true, 	false, 	false, 	false, 	false, 	false, 	false, 
+            false, 	false, 	false, 	false, 	false, 	true, 	false, 	false, 	false, 	false, 	false, 	false, 
+            true, 	false, 	false, 	false, 	false, 	true, 	true, 	true, 	true, 	false, 	false, 	false, 
+            true, 	true, 	true, 	true, 	false, 	true, 	true, 	true, 	true, 	false, 	false, 	false, 
+            false, 	false, 	false, 	true, 	false, 	true, 	true, 	true, 	true, 	false, 	false, 	false, 
+            false, 	false, 	false, 	true, 	false, 	true, 	true, 	true, 	true, 	false, 	false, 	false, 
+            false, 	false, 	false, 	false, 	false, 	true, 	true, 	true, 	true, 	false, 	true, 	false, 
+            false, 	false, 	true, 	false, 	false, 	false, 	false, 	false, 	false, 	true, 	true, 	true, 
+            false, 	false, 	true, 	true, 	false, 	false, 	false, 	false, 	false, 	false, 	true, 	false, 
+            false, 	false, 	true, 	true, 	false, 	false, 	false, 	false, 	false, 	false, 	false, 	false, 
+            false, 	false, 	true, 	true, 	false, 	false, 	false, 	false, 	false, 	false, 	false, 	false, 
+            false, 	false, 	false, 	false, 	false, 	false, 	false, 	false, 	false, 	false, 	false, 	false, 
+        ];
+
+        let num = num_of_islands(&islands, 12, 20);
+        assert_eq!(num, 6);
+    }
+
+    #[test]
+    fn test_7() {
+        let islands = vec![
+            true
+        ];
+    
+        let num = num_of_islands(&islands, 1, 1);
+        assert_eq!(num, 1);
+    }
+
+    #[test]
+    fn test_8() {
+        let islands = vec![
+            false
+        ];
+    
+        let num = num_of_islands(&islands, 0, 0);
+        assert_eq!(num, 0);
+    }
+}
+    
